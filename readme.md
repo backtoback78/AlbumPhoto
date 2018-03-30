@@ -21,8 +21,17 @@ Laravel is a web application framework with expressive, elegant syntax. We belie
 - admin => email: durand@chezlui.fr password: admin
 - user => email: dupont@chezlui.fr password: user
 
+If you are this message: [Illuminate\Database\QueryException]
+SQLSTATE[42000]: Syntax error or access violation: 1071 Specified key was too long; 
 
-Laravel is accessible, yet powerful, providing tools needed for large, robust applications.
+you need to place this code in your AppServiceProvider.php because you are using MariaDB or an older version of MySQL:
+
+use Illuminate\Support\Facades\Schema;
+
+public function boot()
+{
+    Schema::defaultStringLength(191);
+}
 
 
 ## Contributing
